@@ -34,3 +34,12 @@ model.compile(loss='mse', #類別型'categorical_crossentropy'
               optimizer=SGD(lr=0.1),#adam
               metrics=['mse','mape']) #類別型'accuracy'
 #%%
+'模型訓練'
+dnn = model.fit(trainX, trainY,epochs=20,batch_size=30)
+
+#%%
+'預測'
+predictions = model.predict(testX)
+predictions = predictions.reshape(-1, 1)
+np.mean(np.abs((testY - predictions))) #mae
+np.mean(np.abs((testY - predictions) / testY)) * 100 #mape
